@@ -43,7 +43,7 @@
   bottom: 0; /* Moved from -5px to 0 to ensure visibility within button */
   width: 0;
   height: 5px;
-  background: #3161ff;
+  background: white;
   transition: width 0.3s ease, left 0.3s ease;
   z-index: -1; /* Place the line behind the text but within button */
 }

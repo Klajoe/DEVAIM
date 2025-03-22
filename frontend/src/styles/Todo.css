@@ -1,0 +1,221 @@
+/* Genel stil ayarları */
+.todo-calendar {
+    font-family: 'Arial', sans-serif;
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.year-selector {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.year-selector button {
+    background-color: #3b82f6; /* Daha açık mavi */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 0 10px;
+    transition: background-color 0.3s ease;
+}
+
+.year-selector button:hover {
+    background-color: #2563eb; /* Hover durumunda biraz daha koyu mavi */
+}
+
+.year-selector span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.calendar {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.month-navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.month-navigation button {
+    background-color: #3b82f6; /* Daha açık mavi */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+.month-navigation button:hover {
+    background-color: #2563eb; /* Hover durumunda biraz daha koyu mavi */
+}
+
+.month-navigation h3 {
+    font-size: 18px;
+    color: #3b82f6; /* Daha açık mavi */
+}
+
+.days-of-week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    color: #3b82f6; /* Daha açık mavi */
+    font-size: 12px;
+}
+
+.day-name {
+    text-align: center;
+    padding: 5px;
+}
+
+.weeks {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.week {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+}
+
+.day {
+    background-color: #e0f2fe; /* Çok açık mavi */
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    text-align: center;
+    font-size: 14px;
+}
+
+.day:hover {
+    background-color: #bae6fd; /* Hover durumunda biraz daha koyu açık mavi */
+}
+
+.day.selected {
+    background-color: #3b82f6; /* Daha açık mavi */
+    color: white;
+}
+
+.day.empty {
+    background-color: transparent;
+    cursor: default;
+}
+
+.task-manager {
+    margin-top: 20px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-manager h3 {
+    color: #3b82f6; /* Daha açık mavi */
+    margin-bottom: 15px;
+    font-size: 18px;
+}
+
+.task-manager button {
+    background-color: #3b82f6; /* Daha açık mavi */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 15px;
+    transition: background-color 0.3s ease;
+}
+
+.task-manager button:hover {
+    background-color: #2563eb; /* Hover durumunda biraz daha koyu mavi */
+}
+
+.task-lists {
+    display: flex;
+    gap: 20px;
+}
+
+.task-lists > div {
+    flex: 1;
+    background-color: #f9f9f9;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.task-lists h4 {
+    color: #333;
+    margin-bottom: 10px;
+    font-size: 14px;
+}
+
+.task {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px;
+    background-color: white;
+    border-radius: 5px;
+    margin-bottom: 8px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    font-size: 12px;
+}
+
+.task.completed {
+    text-decoration: line-through;
+    color: #888;
+}
+
+.task button {
+    background-color: #3b82f6; /* Daha açık mavi */
+    color: white;
+    border: none;
+    padding: 4px 8px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 12px;
+}
+
+.task button:hover {
+    background-color: #2563eb; /* Hover durumunda biraz daha koyu mavi */
+}
+
+/* Responsive Tasarım */
+@media (max-width: 768px) {
+    .todo-calendar {
+        padding: 10px;
+    }
+
+    .day {
+        padding: 8px;
+        font-size: 12px;
+    }
+
+    .month-navigation h3 {
+        font-size: 16px;
+    }
+}
