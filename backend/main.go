@@ -7,6 +7,9 @@ import (
 	"runtime"
 	"sync"
 	"time"
+
+	"github.com/gorilla/mux"
+	"go.mod/handlers"
 )
 
 type User struct {
@@ -58,16 +61,39 @@ func enableCORS(next http.Handler) http.Handler {
 }
 
 func main() {
-	// Statik dosyaları sun: URL yolu "/" ise index.html, diğer isteklerde ilgili dosyayı sunuyoruz.
-	http.HandleFunc("/", serveFile)
+	// Create a new gorilla/mux router
+	r := mux.NewRouter()
 
-	// API endpoint'leri
-	http.HandleFunc("/api/adduser", addUserHandler)
-	http.HandleFunc("/api/monitor", monitorHandler)
-	http.HandleFunc("/api/logs", logsHandler)
-	http.HandleFunc("/api/deploy", deployHandler)
+	// Static file serving for the React frontend
+	r.HandleFunc("/", serveFile).Methods("GET")
+	// Serve other static assets (e.g., /static/js/*, /static/css/*)
+	r.PathPrefix("/static/").Handler(http.StripPrefix("/static/", http.FileServer(http.Dir("./frontend/build/static"))))
 
-	handler := enableCORS(http.DefaultServeMux)
+	// API endpoints
+	r.HandleFunc("/api/login", handlers.Login).Methods("POST")
+	r.HandleFunc("/api/register", handlers.Register).Methods("POST")
+	r.HandleFunc("/api/forgot-password", handlers.ForgotPassword).Methods("POST")
+
+	// Members endpoints
+	r.HandleFunc("/api/members", handlers.GetMembers).Methods("GET")
+	r.HandleFunc("/api/members", handlers.CreateMember).Methods("POST")
+	r.HandleFunc("/api/members/{id}", handlers.UpdateMember).Methods("PUT")
+	r.HandleFunc("/api/members/{id}", handlers.DeleteMember).Methods("DELETE")
+
+	// Other API endpoints (assuming these handlers exist)
+	r.HandleFunc("/api/adduser", addUserHandler).Methods("POST") // Adjust method as needed
+	r.HandleFunc("/api/monitor", monitorHandler).Methods("GET")  // Adjust method as needed
+	r.HandleFunc("/api/logs", logsHandler).Methods("GET")        // Adjust method as needed
+	r.HandleFunc("/api/deploy", deployHandler).Methods("POST")   // Adjust method as needed
+
+	// Tasks routes
+	r.HandleFunc("/api/tasks", handlers.GetTasks).Methods("GET")
+	r.HandleFunc("/api/tasks", handlers.CreateTask).Methods("POST")
+	r.HandleFunc("/api/tasks/{id}", handlers.UpdateTask).Methods("PUT")
+	r.HandleFunc("/api/tasks/{id}", handlers.DeleteTask).Methods("DELETE")
+
+	// Apply CORS middleware
+	handler := enableCORS(r)
 
 	log.Println("Sunucu port 8080'de çalışıyor...")
 	log.Fatal(http.ListenAndServe(":8080", handler))
@@ -75,10 +101,6 @@ func main() {
 
 // serveFile serves static files and adds CORS headers
 func serveFile(w http.ResponseWriter, r *http.Request) {
-	// Add CORS headers
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	path := r.URL.Path
 	if path == "/" {
@@ -91,10 +113,6 @@ func serveFile(w http.ResponseWriter, r *http.Request) {
 
 // addUserHandler adds a new user and includes CORS headers
 func addUserHandler(w http.ResponseWriter, r *http.Request) {
-	// Add CORS headers
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	w.Header().Set("Access-Control-Allow-Methods", "GET, POST, OPTIONS")
-	w.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 
 	if r.Method == http.MethodOptions {
 		// Handle preflight request

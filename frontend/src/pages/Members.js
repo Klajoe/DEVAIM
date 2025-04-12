@@ -1,57 +1,111 @@
 import React, { useState, useEffect } from "react";
 
 const Members = () => {
-  const [users, setUsers] = useState([
-    { name: "Arda", department: "Backend", experience: "3 Year" },
-    { name: "Ayşe", department: "Frontend", experience: "2 Year" },
-    { name: "Mehmet", department: "DevOps", experience: "4 Year" },
-    { name: "Elif", department: "QA", experience: "1 Year" },
-    { name: "Can", department: "Ops", experience: "5 Year" },
-  ]);
-
-  const [newUser, setNewUser] = useState({
+  const [members, setMembers] = useState([]);
+  const [newMember, setNewMember] = useState({
     name: "",
     department: "",
     experience: "",
   });
+  const [showModal, setShowModal] = useState(false);
+  const [editingMember, setEditingMember] = useState(null);
 
-  const [showModal, setShowModal] = useState(false); // State to control modal visibility
-  const [editingUser, setEditingUser] = useState(null); // State to track the user being edited
+  // Fetch members on component mount
+  useEffect(() => {
+    fetchMembers();
+  }, []);
+
+  const fetchMembers = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/members");
+      if (response.ok) {
+        const data = await response.json();
+        setMembers(data);
+      } else {
+        console.error("Failed to fetch members");
+      }
+    } catch (error) {
+      console.error("Error fetching members:", error);
+    }
+  };
 
   // Handle input changes
   const handleInputChange = (e) => {
     const { id, value } = e.target;
-    setNewUser({ ...newUser, [id]: value });
+    setNewMember({ ...newMember, [id]: value });
   };
 
-  // Handle form submission
-  const handleSubmit = (e) => {
+  // Handle form submission (Add or Edit)
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    if (editingUser) {
-      // Edit existing user
-      const updatedUsers = users.map((user) =>
-        user === editingUser ? newUser : user
-      );
-      setUsers(updatedUsers);
-    } else {
-      // Add new user
-      setUsers([...users, newUser]);
+    try {
+      if (editingMember) {
+        // Update existing member
+        const response = await fetch(
+          `http://localhost:8080/api/members/${editingMember.id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify(newMember),
+          }
+        );
+        if (response.ok) {
+          const updatedMember = await response.json();
+          setMembers(
+            members.map((m) => (m.id === updatedMember.id ? updatedMember : m))
+          );
+        } else {
+          alert("Failed to update member");
+        }
+      } else {
+        // Add new member
+        const response = await fetch("http://localhost:8080/api/members", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(newMember),
+        });
+        if (response.ok) {
+          const createdMember = await response.json();
+          setMembers([...members, createdMember]);
+        } else {
+          alert("Failed to add member");
+        }
+      }
+      setNewMember({ name: "", department: "", experience: "" });
+      setShowModal(false);
+      setEditingMember(null);
+    } catch (error) {
+      console.error("Error:", error);
+      alert("An error occurred");
     }
-    setNewUser({ name: "", department: "", experience: "" });
-    setShowModal(false); // Close the modal after submission
-    setEditingUser(null); // Reset the editing user
   };
 
-  // Handle deleting a user
-  const handleDelete = (user) => {
-    setUsers(users.filter((u) => u !== user));
+  // Handle deleting a member
+  const handleDelete = async (id) => {
+    try {
+      const response = await fetch(`http://localhost:8080/api/members/${id}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        setMembers(members.filter((m) => m.id !== id));
+      } else {
+        alert("Failed to delete member");
+      }
+    } catch (error) {
+      console.error("Error deleting member:", error);
+      alert("An error occurred");
+    }
   };
 
-  // Handle editing a user
-  const handleEdit = (user) => {
-    setEditingUser(user);
-    setNewUser({ ...user }); // Pre-fill the form with the current user data
-    setShowModal(true); // Open the modal
+  // Handle editing a member
+  const handleEdit = (member) => {
+    setEditingMember(member);
+    setNewMember({ ...member });
+    setShowModal(true);
   };
 
   // Close modal when ESC key is pressed
@@ -59,6 +113,8 @@ const Members = () => {
     const handleEscape = (e) => {
       if (e.key === "Escape") {
         setShowModal(false);
+        setNewMember({ name: "", department: "", experience: "" });
+        setEditingMember(null);
       }
     };
     document.addEventListener("keydown", handleEscape);
@@ -83,20 +139,23 @@ const Members = () => {
               </tr>
             </thead>
             <tbody>
-              {users.map((user, index) => (
-                <tr key={index}>
-                  <td>{user.name}</td>
-                  <td>{user.department}</td>
-                  <td>{user.experience}</td>
+              {members.map((member) => (
+                <tr key={member.id}>
+                  <td>{member.name}</td>
+                  <td>{member.department}</td>
+                  <td>{member.experience}</td>
                   <td>
-                    <button className="btned" onClick={() => handleEdit(user)}>
-                      <i className="fas fa-pen"></i> {/* Pen icon */}
+                    <button
+                      className="btned"
+                      onClick={() => handleEdit(member)}
+                    >
+                      <i className="fas fa-pen"></i>
                     </button>
                     <button
                       className="btndel"
-                      onClick={() => handleDelete(user)}
+                      onClick={() => handleDelete(member.id)}
                     >
-                      <i className="fas fa-trash-alt"></i> {/* Trash icon */}
+                      <i className="fas fa-trash-alt"></i>
                     </button>
                   </td>
                 </tr>
@@ -104,7 +163,6 @@ const Members = () => {
             </tbody>
           </table>
         </div>
-        {/* "Add User" Button with space */}
         <div style={{ marginTop: "20px" }}>
           <button className="btn" onClick={() => setShowModal(true)}>
             Add User
@@ -112,17 +170,16 @@ const Members = () => {
         </div>
       </div>
 
-      {/* Modal for Adding or Editing a User */}
       {showModal && (
         <div className="modal">
           <div className="modal-content">
-            <h2>{editingUser ? "Edit User" : "Add New User"}</h2>
+            <h2>{editingMember ? "Edit User" : "Add New User"}</h2>
             <form onSubmit={handleSubmit}>
               <input
                 type="text"
                 id="name"
                 placeholder="Name"
-                value={newUser.name}
+                value={newMember.name}
                 onChange={handleInputChange}
                 required
               />
@@ -130,7 +187,7 @@ const Members = () => {
                 type="text"
                 id="department"
                 placeholder="Department"
-                value={newUser.department}
+                value={newMember.department}
                 onChange={handleInputChange}
                 required
               />
@@ -138,17 +195,21 @@ const Members = () => {
                 type="text"
                 id="experience"
                 placeholder="Experience (e.g., 3 Year)"
-                value={newUser.experience}
+                value={newMember.experience}
                 onChange={handleInputChange}
                 required
               />
               <button type="submit" className="btnsave">
-                {editingUser ? "Save Changes" : "Add"}
+                {editingMember ? "Save Changes" : "Add"}
               </button>
               <button
                 type="button"
                 className="btncls"
-                onClick={() => setShowModal(false)}
+                onClick={() => {
+                  setShowModal(false);
+                  setNewMember({ name: "", department: "", experience: "" });
+                  setEditingMember(null);
+                }}
               >
                 Close
               </button>
