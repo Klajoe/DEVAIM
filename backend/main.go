@@ -20,11 +20,11 @@ type User struct {
 
 var (
 	users = []User{
-		{"Arda", "Backend", "3 Year"},
-		{"Ayşe", "Frontend", "2 Year"},
-		{"Mehmet", "DevOps", "4 Year"},
+		{"Arda", "Backend", "3 Years"},
+		{"Ayşe", "Frontend", "2 Years"},
+		{"Mehmet", "DevOps", "4 Years"},
 		{"Elif", "QA", "1 Year"},
-		{"Can", "Ops", "5 Year"},
+		{"Can", "Ops", "5 Years"},
 	}
 	usersMutex sync.Mutex
 )
@@ -81,10 +81,10 @@ func main() {
 	r.HandleFunc("/api/members/{id}", handlers.DeleteMember).Methods("DELETE")
 
 	// Other API endpoints (assuming these handlers exist)
-	r.HandleFunc("/api/adduser", addUserHandler).Methods("POST") // Adjust method as needed
-	r.HandleFunc("/api/monitor", monitorHandler).Methods("GET")  // Adjust method as needed
-	r.HandleFunc("/api/logs", logsHandler).Methods("GET")        // Adjust method as needed
-	r.HandleFunc("/api/deploy", deployHandler).Methods("POST")   // Adjust method as needed
+	r.HandleFunc("/api/adduser", addUserHandler).Methods("POST")
+	r.HandleFunc("/api/monitor", monitorHandler).Methods("GET")
+	r.HandleFunc("/api/logs", logsHandler).Methods("GET")
+	r.HandleFunc("/api/deploy", deployHandler).Methods("POST")
 
 	// Tasks routes
 	r.HandleFunc("/api/tasks", handlers.GetTasks).Methods("GET")
@@ -95,25 +95,23 @@ func main() {
 	// Apply CORS middleware
 	handler := enableCORS(r)
 
-	log.Println("Sunucu port 8080'de çalışıyor...")
+	log.Println("Server is running on port 8080...")
 	log.Fatal(http.ListenAndServe(":8080", handler))
 }
 
 // serveFile serves static files and adds CORS headers
 func serveFile(w http.ResponseWriter, r *http.Request) {
-
 	path := r.URL.Path
 	if path == "/" {
 		http.ServeFile(w, r, "index.html")
 	} else {
-		// Dosya yolunun başındaki "/" karakterini kaldırarak dosyayı sunuyoruz.
+		// Remove the leading "/" from the file path before serving
 		http.ServeFile(w, r, path[1:])
 	}
 }
 
 // addUserHandler adds a new user and includes CORS headers
 func addUserHandler(w http.ResponseWriter, r *http.Request) {
-
 	if r.Method == http.MethodOptions {
 		// Handle preflight request
 		w.WriteHeader(http.StatusOK)
@@ -121,17 +119,20 @@ func addUserHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method != http.MethodPost {
-		http.Error(w, "Sadece POST yöntemi destekleniyor", http.StatusMethodNotAllowed)
+		http.Error(w, "Only POST method is supported", http.StatusMethodNotAllowed)
 		return
 	}
+
 	var newUser User
 	if err := json.NewDecoder(r.Body).Decode(&newUser); err != nil {
-		http.Error(w, "Veri hatalı", http.StatusBadRequest)
+		http.Error(w, "Invalid data", http.StatusBadRequest)
 		return
 	}
+
 	usersMutex.Lock()
 	users = append(users, newUser)
 	usersMutex.Unlock()
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(newUser)
 }
@@ -156,6 +157,7 @@ func monitorHandler(w http.ResponseWriter, r *http.Request) {
 		NumGoroutine: runtime.NumGoroutine(),
 		Timestamp:    time.Now().Unix(),
 	}
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(metrics)
 }
@@ -175,6 +177,7 @@ func logsHandler(w http.ResponseWriter, r *http.Request) {
 
 	logsMutex.Lock()
 	defer logsMutex.Unlock()
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(logsData)
 }
@@ -193,17 +196,20 @@ func deployHandler(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if r.Method != http.MethodPost {
-		http.Error(w, "Sadece POST yöntemi destekleniyor", http.StatusMethodNotAllowed)
+		http.Error(w, "Only POST method is supported", http.StatusMethodNotAllowed)
 		return
 	}
-	// Deployment işlemini simüle ediyoruz.
+
+	// Simulate deployment process
 	time.Sleep(2 * time.Second)
 	result := map[string]string{
-		"status": "Deployment başarılı şekilde tetiklendi",
+		"status": "Deployment successfully triggered",
 	}
+
 	logsMutex.Lock()
-	logsData = append(logsData, "Deployment tetiklendi: "+time.Now().Format(time.RFC1123))
+	logsData = append(logsData, "Deployment triggered: "+time.Now().Format(time.RFC1123))
 	logsMutex.Unlock()
+
 	w.Header().Set("Content-Type", "application/json")
 	json.NewEncoder(w).Encode(result)
 }

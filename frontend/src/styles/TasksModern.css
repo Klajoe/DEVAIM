@@ -1,235 +1,247 @@
 /* TasksModern.css */
 .tasks-wrapper {
-    font-family: 'Poppins', sans-serif;
-    background: #f7fafc;
-    min-height: 100vh;
-    padding: 20px;
+  font-family: "Poppins", sans-serif;
+  background: #f7fafc;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+.tasks-container {
+  max-width: 1200px;
+  margin: 30px auto;
+}
+
+/* Task Section */
+.task-section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  margin-bottom: 30px;
+  box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
+}
+
+.section-title {
+  font-size: 1.75rem;
+  color: #1e3a8a;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Modern Table */
+.modern-tasks-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.modern-tasks-table th,
+.modern-tasks-table td {
+  padding: 15px;
+  text-align: left;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.modern-tasks-table th {
+  background: #1e3a8a;
+  color: #fff;
+  font-weight: 600;
+}
+
+.modern-tasks-table tr:hover {
+  background: #f1f5f9;
+}
+
+/* Buttons */
+.add-btn {
+  display: block;
+  margin: 15px auto 0;
+  padding: 10px 20px;
+  background: #34d399;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.add-btn:hover {
+  background: #2ea37d;
+  transform: translateY(-2px);
+}
+
+.move-btn {
+  padding: 8px 12px;
+  margin-right: 5px;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.move-btn.now {
+  background: #3b82f6;
+}
+.move-btn.previous {
+  background: #6b7280;
+}
+.move-btn.future {
+  background: #f59e0b;
+}
+
+.move-btn:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  color: #ef4444;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+  margin: 0px 7px;
+}
+
+.delete-btn:hover {
+  color: #dc2626;
+}
+
+.edit-btn {
+  background: none;
+  border: none;
+  color: #3b82f6;
+  cursor: pointer;
+  font-size: 1.2rem;
+  transition: color 0.3s ease;
+  margin: 0px 7px;
+}
+
+.edit-btn:hover {
+  color: #2563eb;
+}
+
+/* Modal */
+.modern-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+  background: #fff;
+  padding: 25px;
+  border-radius: 12px;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.modal-title {
+  font-size: 1.5rem;
+  color: #1e3a8a;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.modal-content input {
+  width: 100%;
+  padding: 10px;
+  margin: 10px 0;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.modal-content input:focus {
+  border-color: #3b82f6;
+  outline: none;
+  box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+}
+
+.modal-actions {
+  display: inline-block;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.save-btn {
+  padding: 10px 20px;
+  background: #34d399;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.save-btn:hover {
+  background: #2ea37d;
+}
+
+.close-btn {
+  padding: 10px 20px;
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.close-btn:hover {
+  background: #dc2626;
+}
+
+.delete-confirm-btn {
+  padding: 10px 20px;
+  background: #ef4444;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.delete-confirm-btn:hover {
+  background: #dc2626;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
   }
-  
-  .tasks-container {
-    max-width: 1200px;
-    margin: 30px auto;
+  to {
+    opacity: 1;
   }
-  
-  /* Task Section */
-  .task-section {
-    background: #fff;
-    border-radius: 12px;
-    padding: 20px;
-    margin-bottom: 30px;
-    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.05);
-  }
-  
-  .section-title {
-    font-size: 1.75rem;
-    color: #1e3a8a;
-    margin-bottom: 15px;
-    text-align: center;
-  }
-  
-  /* Modern Table */
-  .modern-tasks-table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
   .modern-tasks-table th,
   .modern-tasks-table td {
-    padding: 15px;
-    text-align: left;
-    border-bottom: 1px solid #e2e8f0;
-  }
-  
-  .modern-tasks-table th {
-    background: #1e3a8a;
-    color: #fff;
-    font-weight: 600;
-  }
-  
-  .modern-tasks-table tr:hover {
-    background: #f1f5f9;
-  }
-  
-  /* Buttons */
-  .add-btn {
-    display: block;
-    margin: 15px auto 0;
-    padding: 10px 20px;
-    background: #34d399;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: all 0.3s ease;
-  }
-  
-  .add-btn:hover {
-    background: #2ea37d;
-    transform: translateY(-2px);
-  }
-  
-  .move-btn {
-    padding: 8px 12px;
-    margin-right: 5px;
-    border: none;
-    border-radius: 6px;
-    color: #fff;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .move-btn.now { background: #3b82f6; }
-  .move-btn.previous { background: #6b7280; }
-  .move-btn.future { background: #f59e0b; }
-  
-  .move-btn:hover {
-    opacity: 0.9;
-    transform: translateY(-1px);
-  }
-  
-  .delete-btn {
-    background: none;
-    border: none;
-    color: #ef4444;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
-  }
-  
-  .delete-btn:hover {
-    color: #dc2626;
-  }
-  
-  .edit-btn {
-    background: none;
-    border: none;
-    color: #3b82f6;
-    cursor: pointer;
-    font-size: 1.2rem;
-    transition: color 0.3s ease;
-  }
-  
-  .edit-btn:hover {
-    color: #2563eb;
-  }
-  
-  /* Modal */
-  .modern-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(0, 0, 0, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    z-index: 1000;
-    animation: fadeIn 0.3s ease;
-  }
-  
-  .modal-content {
-    background: #fff;
-    padding: 25px;
-    border-radius: 12px;
-    width: 90%;
-    max-width: 500px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-  }
-  
-  .modal-title {
-    font-size: 1.5rem;
-    color: #1e3a8a;
-    margin-bottom: 20px;
-    text-align: center;
-  }
-  
-  .modal-content input {
-    width: 100%;
     padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #d1d5db;
-    border-radius: 6px;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
+    font-size: 0.9rem;
   }
-  
-  .modal-content input:focus {
-    border-color: #3b82f6;
-    outline: none;
-    box-shadow: 0 0 5px rgba(59, 130, 246, 0.5);
+
+  .move-btn {
+    padding: 6px 10px;
+    font-size: 0.9rem;
   }
-  
-  .modal-actions {
-    display: inline-block;
-    justify-content: space-between;
-    margin-top: 20px;
+
+  .modal-content {
+    width: 95%;
+    padding: 15px;
   }
-  
-  .save-btn {
-    padding: 10px 20px;
-    background: #34d399;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .save-btn:hover {
-    background: #2ea37d;
-  }
-  
-  .close-btn {
-    padding: 10px 20px;
-    background: #ef4444;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .close-btn:hover {
-    background: #dc2626;
-  }
-  
-  .delete-confirm-btn {
-    padding: 10px 20px;
-    background: #ef4444;
-    color: #fff;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-  }
-  
-  .delete-confirm-btn:hover {
-    background: #dc2626;
-  }
-  
-  /* Animations */
-  @keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-  }
-  
-  /* Responsive Design */
-  @media (max-width: 768px) {
-    .modern-tasks-table th,
-    .modern-tasks-table td {
-      padding: 10px;
-      font-size: 0.9rem;
-    }
-  
-    .move-btn {
-      padding: 6px 10px;
-      font-size: 0.9rem;
-    }
-  
-    .modal-content {
-      width: 95%;
-      padding: 15px;
-    }
-  }
+}

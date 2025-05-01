@@ -1,165 +1,235 @@
-/* PullRequest.css */
-
-/* Genel kapsayıcı */
+/* PullRequest.css /
+/ Genel kapsayıcı */
 .pull-request-container {
-    width: 90%;
-    max-width: 1200px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 10px; /* Genel temadan */
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Genel temadan */
-  }
-  
-  /* Repo seçici kapsayıcı */
-  .repo-selector {
-    position: relative;
-    text-align: center;
-  }
-  
-  /* Başlık */
-  .pull-request-title {
-    font-size: 2em; /* Genel temadan */
-    font-weight: 600;
-    color: #333; /* Genel temadan */
-    margin-bottom: 20px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 12px;
-    border-radius: 8px; /* Genel temadan */
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-  
-  .pull-request-title:hover {
-    background-color: #eef2f7; /* Genel temaya uyumlu açık gri */
-    color: #2563eb; /* Genel temadan mavi */
-  }
-  
-  /* Dropdown oku */
-  .dropdown-arrow {
-    font-size: 12px;
-    transition: transform 0.2s ease;
-  }
-  
-  .pull-request-title:hover .dropdown-arrow {
-    transform: rotate(180deg);
-  }
-  
-  /* Dropdown menü */
-  .dropdown-menu {
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%) scale(0.95);
-    width: 220px;
-    background-color: #ffffff;
-    border: 1px solid #bbb; /* Genel temadan */
-    border-radius: 8px; /* Genel temadan */
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
-    list-style: none;
-    padding: 8px 0;
-    z-index: 10;
-    opacity: 0;
-    visibility: hidden;
-    transition: opacity 0.2s ease, transform 0.2s ease;
-  }
-  
-  /* Dropdown açıkken */
-  .repo-selector .pull-request-title:focus-within + .dropdown-menu,
-  .dropdown-menu {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-50%) scale(1);
-  }
-  
-  /* Dropdown öğeleri */
-  .dropdown-item {
-    padding: 10px 16px;
-    font-size: 14px;
-    color: #333; /* Genel temadan */
-    cursor: pointer;
-    transition: background-color 0.2s ease, color 0.2s ease;
-  }
-  
-  .dropdown-item:hover {
-    background-color: #2563eb; /* Genel temadan mavi */
-    color: #ffffff;
-  }
-  
-  /* Yüklenme ve hata mesajları */
-  .pull-request-loading {
-    text-align: center;
-    color: #333; /* Genel temadan */
-    font-size: large; /* Genel temadan */
-  }
-  
-  .pull-request-error {
-    text-align: center;
-    color: #eb2525; /* Genel temadan */
-    font-size: large;
-    font-weight: bold;
-  }
-  
-  /* Bölüm başlıkları */
-  .pulls-section {
-    margin-top: 30px;
-  }
-  
-  .pulls-section-title {
-    font-size: 18px;
-    font-weight: bold;
-    color: #333; /* Genel temadan */
-    border-bottom: 2px solid #2563eb; /* Genel temadan */
-    padding-bottom: 8px;
-    margin-bottom: 16px;
-  }
-  
-  /* Tablo için genel tema task-table kullanılıyor, ek stiller */
-  .pulls-table {
+  width: 95%;
+  max-width: 1200px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Repo seçici kapsayıcı */
+.repo-selector {
+  position: relative;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Başlık */
+.pull-request-title {
+  font-size: 1.8em;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 20px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.pull-request-title {
+  background-color: #eef2f7;
+  color: #2563eb;
+}
+
+/* Dropdown oku */
+.dropdown-arrow {
+  font-size: 12px;
+  transition: transform 0.2s ease;
+}
+
+.pull-request-title .dropdown-arrow {
+  transform: rotate(180deg);
+}
+
+/* Dropdown menü */
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 220px;
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  list-style: none;
+  padding: 8px 0;
+  z-index: 10;
+  margin-top: 5px;
+}
+
+/* Dropdown öğeleri */
+.dropdown-item {
+  padding: 10px 16px;
+  font-size: 14px;
+  color: #333;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.dropdown-item {
+  background-color: #2563eb;
+  color: #ffffff;
+}
+
+/* Yüklenme ve hata mesajları */
+.pull-request-loading {
+  text-align: center;
+  color: #333;
+  font-size: 1rem;
+  padding: 20px;
+}
+
+.pull-request-error {
+  text-align: center;
+  color: #eb2525;
+  font-size: 1rem;
+  font-weight: bold;
+  padding: 20px;
+  background-color: #fff5f5;
+  border-radius: 8px;
+}
+
+/* Bölüm başlıkları */
+.pulls-section {
+  margin-top: 30px;
+}
+
+.pulls-section-title {
+  font-size: 18px;
+  font-weight: bold;
+  color: #333;
+  border-bottom: 2px solid #2563eb;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+}
+
+/* Modern Tablo Stilleri */
+.pulls-table {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  margin-bottom: 30px;
+}
+
+.pulls-table table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 600px; /* Minimum genişlik */
+}
+
+.pulls-table th {
+  background-color: #1e3a8a;
+  color: white;
+  text-align: left;
+  padding: 14px 16px;
+  font-weight: 600;
+  font-size: 14px;
+  white-space: nowrap;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.pulls-table td {
+  padding: 12px 16px;
+  color: #334155;
+  font-size: 14px;
+}
+
+.pulls-table tr {
+  border-bottom: 1px solid #e2e8f0;
+}
+
+/* Hücrelerde taşma kontrolü */
+.pulls-table td {
+  max-width: 250px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Başlık sütunu için özel stil */
+.pulls-table td {
+  max-width: 300px;
+}
+
+/* Hover efekti */
+.pulls-table tbody tr {
+  background-color: #f1f5f9;
+}
+
+/* Link stilleri */
+.pulls-table a {
+  color: #2563eb;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s;
+}
+
+.pulls-table a {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* Durum hücresi ve yuvarlaklar */
+.status-cell {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.status-open-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #109624;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.status-closed-dot {
+  width: 8px;
+  height: 8px;
+  background-color: #eb2525;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+/* "Pull request yok" mesajı */
+.no-pulls {
+  text-align: center;
+  color: #64748b;
+  font-size: 1rem;
+  padding: 24px;
+  background-color: #f8fafc;
+  border-radius: 8px;
+  border: 1px dashed #cbd5e1;
+}
+
+/* Responsive tasarım */
+@media (max-width: 768px) {
+  .pull-request-container {
     width: 100%;
+    padding: 15px;
+    border-radius: 0;
   }
-  
-  /* Durum hücresi ve yuvarlaklar */
-  .status-cell {
-    display: flex;
-    align-items: center;
-    gap: 6px;
+
+  .pull-request-title {
+    font-size: 1.5em;
   }
-  
-  .status-open-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #109624; /* Genel temadan yeşil */
-    border-radius: 50%;
-    display: inline-block;
+
+  .dropdown-menu {
+    width: 180px;
   }
-  
-  .status-closed-dot {
-    width: 8px;
-    height: 8px;
-    background-color: #eb2525; /* Genel temadan kırmızı */
-    border-radius: 50%;
-    display: inline-block;
+
+  .pulls-table th,
+  .pulls-table td {
+    padding: 10px 12px;
+    font-size: 13px;
   }
-  
-  /* "Pull request yok" mesajı */
-  .no-pulls {
-    text-align: center;
-    color: #333;
-    font-size: large;
-    padding: 16px;
-  }
-  
-  /* Responsive tasarım */
-  @media (max-width: 768px) {
-    .pull-request-container {
-      width: 95%;
-      padding: 15px;
-    }
-  
-    .dropdown-menu {
-      width: 180px;
-    }
-  }
+}
