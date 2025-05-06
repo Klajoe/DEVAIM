@@ -8,22 +8,62 @@ DEVAIM is a lightweight developer assistant and dashboard tool inspired by platf
 - 🐛 Issue Tracker: View and filter issues from any GitHub repository.
 - 📦 Pull Request Viewer: Track open, closed, and merged pull requests.
 - 📊 Project Dashboard: A clean and responsive UI to display repository data.
-- ⚙️ Modular & Extendable: Easily adaptable for other APIs or Git platforms in the future.  
+- ⚙️ Modular & Extendable: Easily adaptable for other APIs or Git platforms in the future.
 
 ## 🚀 Technologies Used
 
-- React – Front-end library for building user interfaces. 
+- React – Front-end library for building user interfaces.
 - HTML5 & CSS3 – Structuring and styling the application.
 - GitHub REST API – For fetching data like issues and pull requests.
-- GitHub REST API  
+- GitHub REST API
 
-📸 Screenshots
+## 📸 Screenshots
+
+### 🔐 Login Page
+
+![Login Page](screenshots/1.png)
+
+### 🏠 Home Page
+
+![Home Page](screenshots/2.png)
+
+### 👥 Members Page
+
+![Members Page](screenshots/3.png)
+
+### 📅 Activity Page
+
+![Activity Page](screenshots/4.png)
+
+### ✅ Tasks Page
+
+![Tasks Page](screenshots/5.png)
+
+### 🔀 Merge Requests Page
+
+![Merge Requests Page](screenshots/6.png)
+
+### 🔃 Pull Requests Page
+
+![Pull Requests Page](screenshots/7.png)
+
+### 📊 Monitoring Page
+
+![Monitoring Page](screenshots/8.png)
+
+### ⚙️ CI/CD Page
+
+![CI/CD Page](screenshots/9.png)
+
+### 📝 To-do List Page
+
+![To-do List Page](screenshots/10.png)
 
 ## 📌 Future Plans
 
-- GitLab integration  
-- CI/CD visualization (like Jenkins pipelines)  
-- Authentication with OAuth  
+- GitLab integration
+- CI/CD visualization (like Jenkins pipelines)
+- Authentication with OAuth
 - Team dashboards and analytics
 
 🤝 Contributing
