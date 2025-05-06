@@ -17,11 +17,12 @@ DEVAIM is a lightweight developer assistant and dashboard tool inspired by platf
 
 📸 Screenshots
 
-📌 Future Plans
-	•	GitLab integration
-	•	CI/CD visualization (like Jenkins pipelines)
-	•	Authentication with OAuth
-	•	Team dashboards and analytics
+## 📌 Future Plans
+
+- GitLab integration  
+- CI/CD visualization (like Jenkins pipelines)  
+- Authentication with OAuth  
+- Team dashboards and analytics
 
 🤝 Contributing
 
