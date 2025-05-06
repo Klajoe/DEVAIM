@@ -23,41 +23,49 @@ DEVAIM is a lightweight developer assistant and dashboard tool inspired by platf
 
 ![Login Page](screenshots/1.png)
 
+### 🔑 Register Page
+
+![Forgot Password Page](screenshots/2.png)
+
+### 📝 Forgot Password Page
+
+![Register Page](screenshots/3.png)
+
 ### 🏠 Home Page
 
-![Home Page](screenshots/2.png)
+![Home Page](screenshots/4.png)
 
 ### 👥 Members Page
 
-![Members Page](screenshots/3.png)
+![Members Page](screenshots/5.png)
 
 ### 📅 Activity Page
 
-![Activity Page](screenshots/4.png)
+![Activity Page](screenshots/6.png)
 
 ### ✅ Tasks Page
 
-![Tasks Page](screenshots/5.png)
+![Tasks Page](screenshots/7.png)
 
 ### 🔀 Merge Requests Page
 
-![Merge Requests Page](screenshots/6.png)
+![Merge Requests Page](screenshots/8.png)
 
 ### 🔃 Pull Requests Page
 
-![Pull Requests Page](screenshots/7.png)
+![Pull Requests Page](screenshots/9.png)
 
 ### 📊 Monitoring Page
 
-![Monitoring Page](screenshots/8.png)
+![Monitoring Page](screenshots/10.png)
 
 ### ⚙️ CI/CD Page
 
-![CI/CD Page](screenshots/9.png)
+![CI/CD Page](screenshots/11.png)
 
 ### 📝 To-do List Page
 
-![To-do List Page](screenshots/10.png)
+![To-do List Page](screenshots/12.png)
 
 ## 📌 Future Plans
 
